@@ -4,6 +4,12 @@ from mpl_toolkits.mplot3d import axes3d
 import os, sys
 import numpy as np
 
+###########
+# CREDITS: Code taken from https://zulko.wordpress.com/2012/09/29/animate-your-3d-plots-with-pythons-matplotlib/
+# Not original code!
+###########
+
+
 
 ##### TO CREATE A SERIES OF PICTURES
 
