@@ -15,22 +15,37 @@ The following functions are available:
 
 **wasserstein_upper**: Calculates a tight upper bound on the maximal Wasserstein distance between the histogram approximation and a sample.\
 *Parameters*:
-* n : integer giving the number of breakpoints
-* m : vector of length n+1 giving the total mass in each interval [(i-1)/(n+1) ,i/(n+1)] of the true distribution
-* m_tilde : vector of length n+1 giving the quantized masses
-* c_tilde : vector of length n+1 giving the quantized breakpoints\
+* n : int
+    * gives the number of breakpoints
+* m : list of float
+    * length n+1 giving the total mass in each interval [(i-1)/(n+1) ,i/(n+1)] of the true distribution
+* m_tilde : list of float   
+    * length n+1 giving the quantized masses
+* c_tilde : list of float
+    * length n+1 giving the quantized breakpoints\
 *Returns*:
-* wasserstein_upper: Float contains the upper bound on the Wasserstein distance. 
+* wasserstein_upper: float 
+    * contains the upper bound on the Wasserstein distance. 
 
 
-**calc_quantized_breakpoints_masses**: 
-
+**calc_quantized_breakpoints_masses**:  Main algorithm that generates a quantized vector of x-axis breakpoints and a vector of probability masses for each region between breakpoints.\
 *Arguments*:
 * dist_points : vector containing a sample from the true distribution
 * n : number of breakpoints
-* delta : sets the fineness of the quantization
-
+* delta : sets the fineness of the quantization\
 *Returns*:
+* k: list of int 
+    * corresponds to m_tilde, fineness set with delta
+* g: list of int 
+    * corresponds to c_tilde, fineness set with delta
+* m_tilde: list of float
+    * quantized probability masses for each region between breakpoints  
+* c_tilde: list of float 
+    * quantized breakpoints
+* m_true: list of float 
+    * true masses based on dist_points for the intervals between the breakpoints in c_true
+* c_true: list of float 
+    * true equally-spaced breakpoints
 
 
 
