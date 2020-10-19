@@ -13,24 +13,26 @@ The main functions are contained in the script generate_histogram_approximations
 
 The following functions are available:
 
-**wasserstein_upper**: Calculates a tight upper bound on the maximal Wasserstein distance between the histogram approximation and a sample.
-
+**wasserstein_upper**: Calculates a tight upper bound on the maximal Wasserstein distance between the histogram approximation and a sample.\
 *Parameters*:
 * n : integer giving the number of breakpoints
 * m : vector of length n+1 giving the total mass in each interval [(i-1)/(n+1) ,i/(n+1)] of the true distribution
 * m_tilde : vector of length n+1 giving the quantized masses
-* c_tilde : vector of length n+1 giving the quantized breakpoints
-
+* c_tilde : vector of length n+1 giving the quantized breakpoints\
 *Returns*:
-wasserstein_upper: Float contains the upper bound on the Wasserstein distance. 
+* wasserstein_upper: Float contains the upper bound on the Wasserstein distance. 
+
 
 **calc_quantized_breakpoints_masses**: 
+
 *Arguments*:
-dist_points : vector containing a sample from the true distribution
-n : number of breakpoints
-delta : sets the fineness of the quantization
+* dist_points : vector containing a sample from the true distribution
+* n : number of breakpoints
+* delta : sets the fineness of the quantization
 
 *Returns*:
+
+
 
 
 
