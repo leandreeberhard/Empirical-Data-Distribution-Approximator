@@ -8,3 +8,5 @@ A piecewise-linear function is a from the interval [0,1] to an interval [0,c], w
 Tentmap functions and sawtooth functions are two names for the same thing. Esentially, a sawtooth function oscilates up and down on the interval [0,1] in a straight line, where we specify the number of pieces that we want. The higher the number of pieces, the more oscilations we have. This allows us to fill higher-dimensional space.
 
 The file generate_hisogram_approximation.py contains the main functions.
+
+# Running the code
