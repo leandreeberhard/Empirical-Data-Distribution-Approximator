@@ -15,24 +15,26 @@ The following functions are available:
 
 **wasserstein_upper**: Calculates a tight upper bound on the maximal Wasserstein distance between the histogram approximation and a sample.\
 *Parameters*:
-* n : int
+* n: int
     * gives the number of breakpoints
-* m : list of float
+* m: list of float
     * length n+1 giving the total mass in each interval [(i-1)/(n+1) ,i/(n+1)] of the true distribution
-* m_tilde : list of float   
+* m_tilde: list of float   
     * length n+1 giving the quantized masses
-* c_tilde : list of float
+* c_tilde: list of float
     * length n+1 giving the quantized breakpoints\
+    
 *Returns*:
 * wasserstein_upper: float 
     * contains the upper bound on the Wasserstein distance. 
 
 
 **calc_quantized_breakpoints_masses**:  Main algorithm that generates a quantized vector of x-axis breakpoints and a vector of probability masses for each region between breakpoints.\
-*Arguments*:
-* dist_points : vector containing a sample from the true distribution
-* n : number of breakpoints
-* delta : sets the fineness of the quantization\
+*Parameters*:
+* dist_points: vector containing a sample from the true distribution
+* n: number of breakpoints
+* delta: sets the fineness of the quantization\
+
 *Returns*:
 * k: list of int 
     * corresponds to m_tilde, fineness set with delta
@@ -47,8 +49,20 @@ The following functions are available:
 * c_true: list of float 
     * true equally-spaced breakpoints
 
+**generate_histogram_dist**: Generates points from the approximating histogram distribution given in the output of calc_quantized_breakpoints_masses.\
+*Parameters*:
+* n: int
+    * number of breakpoints
+* c_tilde: list of float
+    * estimated breakpoint locations; output from calc_quantized_breakpoints_masses
+* m_tilde: list of float 
+    * estimated masses; output from calc_quantized_breakpoints_masses
+* size: int
+    * number of samples to generate fron the quantized histogram approximating distribution\ 
 
-
+*Returns*:
+* sample: list of float
+    * sample of size `size` according to the histogram distribution specified by `calc_quantized_breakpoints_masses`.\
 
 
 # Examples
