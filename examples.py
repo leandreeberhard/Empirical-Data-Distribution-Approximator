@@ -51,7 +51,7 @@ z_2 = z_2.reshape((n, 1))
 test_data = np.concatenate((z_1, z_2), axis=1)
 
 # plot the original distribution in blue, smoothed using a kde smoother
-graph = sns.jointplot(x=test_data[:, 0], y=test_data[:, 1], kind="kde", space=0, color='blue')
+graph = sns.jointplot(x=test_data[:, 0], y=test_data[:, 1], kind="kde", space=0, color='red')
 plt.show()
 
 # set parameters
@@ -66,13 +66,13 @@ sg = SampleGenerator(test_data, precision, density, delta)
 sampled_points = sg.sample_points(10000)
 
 # plot newly sampled points by themselves
-sns.jointplot(x=sampled_points[:, 0], y=sampled_points[:, 1], kind="kde", space=0, color='red')
+sns.jointplot(x=sampled_points[:, 0], y=sampled_points[:, 1], kind="kde", space=0, color='blue')
 plt.show()
 
 # plot the newly sampled points onto the same plot as the original points
 graph.x = sampled_points[:, 0]
 graph.y = sampled_points[:, 1]
 
-graph.plot_joint(sns.kdeplot, color='red')
+graph.plot_joint(sns.kdeplot, color='blue')
 
 plt.show()
