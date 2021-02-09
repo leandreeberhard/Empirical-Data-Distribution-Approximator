@@ -3,7 +3,6 @@ import numpy as np
 from math import ceil, floor
 import itertools as it
 
-
 # approximates the empirical distribution of the points in the array
 
 # Step 1: scale the distribution so that the all the points are in the interval [0,1]
@@ -49,47 +48,8 @@ def undo_scaling(scaled_array, scale_factors):
     return descaled_data
 
 
-
 # pick scaled masses and breakpoints
-
-
 # Step 1: calculate the true masses in each subcube according to the input data considered as an empirical distribution
-# i = 1,...,precision
-# corresponds to C_i in thesis
-def is_in_subinterval(x, i, precision):
-    if i == 1:
-        return 0 <= x <= 1/precision
-    else:
-        return (i-1)/precision < x <= i/precision
-
-# i is a vector of length k of indices
-# x is a vector of length k containing a data point
-# corresponds to C_{i_k} in thesis
-def is_in_subcube(x, i, precision):
-    if len(x) != len(i):
-        print('Error: x and i must have the same length')
-        return None
-    else:
-        return all(is_in_subinterval(x[j], i[j], precision) for j in range(len(x)))
-
-
-def calculate_true_masses(scaled_array, precision):
-    # subcube indices: returns list of length precision**dimension_of_data
-    def indices_to_check():
-        return it.product(*[[i for i in range(1,precision+1)] for _ in range(scaled_array.shape[1])])
-
-    true_masses = dict((i, None) for i in indices_to_check())
-
-    for i in indices_to_check():
-        rows = [scaled_array[i,:] for i in range(scaled_array.shape[0])]
-        true_masses[i] = sum([is_in_subcube(point, i, precision) for point in rows]) / scaled_array.shape[0]
-
-    return true_masses
-
-
-#######################################################
-# USE THIS VERSION !!!
-#######################################################
 # try to assign the points to the correct subcubes immediately
 # classify separately for each coordinate
 def calculate_true_masses(scaled_array, precision):
@@ -346,7 +306,7 @@ def approximator(x, precision, density, quantized_breakpoints_dict, quantized_sc
 
 
 # class containing the functions
-class DistributionSampler():
+class SampleGenerator:
     def __init__(self, input_data, precision=None, density=None, delta=None):
         if precision is None:
             self.precision = 20
