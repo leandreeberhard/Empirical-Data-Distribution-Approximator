@@ -18,10 +18,10 @@ density = ceil(precision/2)
 test_data = np.array([[1, 1.5, 3.5], [1, 2, 3], [5, 10, 2], [3, 3, 1], [-1, -1, -5]])
 
 # create a new distribution sampler object using the test data
-ds = SampleGenerator(test_data, precision, density, delta)
+sg = SampleGenerator(test_data, precision, density, delta)
 
 # sample some points from the estimated distribution
-sample_points = ds.sample_points(n_points=1000)
+sample_points = sg.sample_points(n_points=1000)
 
 from mpl_toolkits import mplot3d
 fig = plt.figure()
@@ -60,10 +60,10 @@ delta = (1 / ceil(precision * (precision-1)))**2
 density = ceil(precision/2)
 
 # create a new distribution sampler object using the test data
-ds = SampleGenerator(test_data, precision, density, delta)
+sg = SampleGenerator(test_data, precision, density, delta)
 
 # generate a new sample from the estimated distribution
-sampled_points = ds.sample_points(10000)
+sampled_points = sg.sample_points(10000)
 
 # plot newly sampled points by themselves
 sns.jointplot(x=sampled_points[:, 0], y=sampled_points[:, 1], kind="kde", space=0, color='red')
