@@ -5,11 +5,11 @@ Running the code is easy and can be done in three lines of code.
 
 First, you need to import the main project file using the command
 
-`from distribution_approximator import SampleGenerator` 
+1. `from distribution_approximator import SampleGenerator` 
 
 Then, create a new SampleGenerator object using your data source stored as a numpy array, with the rows containing each data point and the columns containing the entries of the data points. 
 
-`sg = SampleGenerator(data_array, precision=None, density=None, delta=None)`
+2. `sg = SampleGenerator(data_array, precision=None, density=None, delta=None)`
 
 There are three parameters that can optionally be set:
 * `precision`: Controls the number of regions the sample space is divided into. Larger values mean the estimated distribution will more closely match the given empirical distribution. Beware of overfitting when this is too high.
@@ -18,7 +18,7 @@ There are three parameters that can optionally be set:
 
 Finally, we can generate new samples using the following command.
 
-`samples = sg.sample_points(n_points=1000)`
+3. `samples = sg.sample_points(n_points=1000)`
 
 There is one parameter for this function.
 * `n_points`: sets the number of new samples to generate.
