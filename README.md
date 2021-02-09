@@ -1,4 +1,4 @@
-The goal of this project to sample points from an empirical data source using only the samples, without any knowledge of the underlying distribution. This is similar to generative modeling, where new distinct samples resembling the given data are generated. Where this differs from bootstrap sampling is that the newly generated data points are not identical to the given data samples.
+The goal of this project to sample points from a multi-dimensional empirical data source using only the samples, without any knowledge of the underlying distribution. This is similar to generative modeling, where new distinct samples resembling the given data are generated. Where this differs from bootstrap sampling is that the newly generated data points are not identical to the given data samples. Currently, the algorithm is only feasible for low-dimensional data, but I am working on optimizing it for high-dimensional data.
 
 # Running the Code
 Running the code is easy and can be done in three lines of code.
@@ -22,8 +22,6 @@ Finally, we can generate new samples using the following command.
 
 There is one parameter for this function.
 * `n_points`: sets the number of new samples to generate.
-
-
 
 
 
