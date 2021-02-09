@@ -4,7 +4,8 @@ The goal of this project to sample points from an empirical data source using on
 Running the code is easy and can be done in three lines of code.
 
 First, you need to import the main project file using the command
-`from distribution_approximator import SampleGenerator` .
+
+`from distribution_approximator import SampleGenerator` 
 
 Then, create a new SampleGenerator object using your data source stored as a numpy array, with the rows containing each data point and the columns containing the entries of the data points. There are three parameters that can optionally be set:
 * `precision`: Controls the number of regions the sample space is divided into. Larger values mean the estimated distribution will more closely match the given empirical distribution. Beware of overfitting when this is too high.
@@ -14,13 +15,19 @@ Then, create a new SampleGenerator object using your data source stored as a num
 `sg = SampleGenerator(data_array, precision=None, density=None, delta=None)`
 
 Finally, we can generate new samples using the following command.
-* `n_points`: sets the number of new samples to generate
+* `n_points`: sets the number of new samples to generate.
+
 `samples = sg.sample_points(n_points=1000)`
 
 
 
 # Examples
 You can generate the following two examples by running `examples.py`.
+
+* 3D example. Here we use a data sample consisting of five three-dimensional points. This example illustrates how the algorithm works. The algorithm divides up the sample space into `precision**dimension` boxes. The probability mass assigned to each box is proportional to the number of data points from the sample falling into that box. In the examples, the red points are the original data sample, while the blue points are newly-generated points using the algorithm. 
+
+![](3d_example1.png)
+![](3d_example2.png)
 
 
 The two main ingredients of the approximator are the following:
