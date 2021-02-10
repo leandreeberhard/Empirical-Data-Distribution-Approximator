@@ -1,4 +1,4 @@
-The goal of this project to sample points from a multi-dimensional empirical data source using only the samples, without any knowledge of the underlying distribution. This is similar to generative modeling, where new distinct samples resembling the given data are generated. Where this differs from bootstrap sampling is that the newly generated data points are not identical to the given data samples. Currently, the algorithm is only feasible for low-dimensional data, but I am working on optimizing it for high-dimensional data.
+The goal of this project to sample points from a multi-dimensional empirical data source using only the samples, without any knowledge of the underlying distribution. This is similar to generative modeling, where new distinct samples resembling the given data are generated. Where this differs from sampling from the empirical distribution (as in bootstrap) is that the newly-generated data points are not identical to a point in the given sample. Currently, the algorithm is only feasible for low-dimensional data, but I am working on optimizing it for high-dimensional data.
 
 # Running the Code
 Running the code is easy and can be done in three lines of code.
@@ -14,7 +14,7 @@ Then, create a new SampleGenerator object using your data source stored as a num
 There are three parameters that can optionally be set:
 * `precision`: Controls the number of regions the sample space is divided into. Larger values mean the estimated distribution will more closely match the given empirical distribution. Beware of overfitting when this is too high.
 * `density`: Controls how densly packed the points in each region are distributed. This parameters is the number of peaks in the tentmap (see below).
-* `delta`: Controls the minimal mass that can be assigned to a region of the sample space. Setting this too low will lead to a high probability of non-representative samples. Make sure not to set `delta` to be lower than `1/(precision*(precision-1))` 
+* `delta`: Controls the minimal mass that can be assigned to a region of the sample space. Setting this too high will lead to a high probability of non-representative samples. Make sure not to set `delta` to be lower than `1/(precision*(precision-1))` -- otherwise some of the regions will be assigned negative mass.
 
 Finally, we can generate new samples using the following command.
 
