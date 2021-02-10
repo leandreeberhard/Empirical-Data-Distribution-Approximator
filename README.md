@@ -7,7 +7,7 @@ First, you need to download and copy the main project file `distribution_approxi
 
 1. `from distribution_approximator import SampleGenerator` 
 
-Then, create a new SampleGenerator object using your data source stored as a numpy array, with the rows containing each data point and the columns containing the entries of the data points. 
+Then, create a new SampleGenerator object using your data source stored as a numpy array, where the rows contain the data points. The dimensionality of the data can in principle be arbitrary (but as of now, it will be slow for high dimensions).
 
 2. `sg = SampleGenerator(data_array, precision=None, density=None, delta=None)`
 
