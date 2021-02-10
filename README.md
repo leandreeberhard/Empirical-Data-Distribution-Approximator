@@ -3,7 +3,7 @@ The goal of this project to sample points from a multi-dimensional empirical dat
 # Running the Code
 Running the code is easy and can be done in three lines of code.
 
-First, you need to import the main project file using the command
+First, you need to download and copy the main project file `distribution_approximator.py` into your Python working directory and run the command
 
 1. `from distribution_approximator import SampleGenerator` 
 
