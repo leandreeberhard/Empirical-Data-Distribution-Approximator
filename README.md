@@ -28,7 +28,7 @@ There is one parameter for this function.
 # Examples
 You can generate the following two examples by running `examples.py`.
 
-* 3D Example: Here we use a data sample consisting of five three-dimensional points. This example illustrates how the algorithm works. The algorithm divides up the sample space into `precision**dimension` boxes. The probability mass assigned to each box is proportional to the number of data points from the sample falling into that box. In the examples, the red points are the original data sample, while the blue points are newly-generated points using the algorithm. 
+* 3D Example: Here we use a data sample consisting of five three-dimensional points. This example is meant to illustrate how the algorithm works. The algorithm divides up the sample space into `precision**dimension` boxes. The probability mass assigned to each box is proportional to the number of data points from the sample falling into that box. In the examples, the red points are the original data sample, while the blue points are newly-generated points using the algorithm. Note for the algorithm to be successful and generate data points that are not simply noisy copies of existing data points, it is recommended that there be more than one data point per box.
 
 ![](3d_example1.png)
 

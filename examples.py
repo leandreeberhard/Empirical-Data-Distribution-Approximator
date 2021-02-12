@@ -1,8 +1,8 @@
 # This file contains two examples: one for two-dimensional data and the other for 3-dimensional test data
 # See the 3 dimensional to see how algorithm works
-from distribution_approximator import SampleGenerator
+from distribution_approximator_new import SampleGenerator
 import numpy as np
-from math import ceil
+from math import ceil, sqrt
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -10,7 +10,7 @@ import seaborn as sns
 # Example 1: 3D data
 ######################################################
 
-precision = 20
+precision = 10
 delta = (1 / ceil(precision * (precision-1)))**2
 density = ceil(precision/2)
 
@@ -21,7 +21,7 @@ test_data = np.array([[1, 1.5, 3.5], [1, 2, 3], [5, 10, 2], [3, 3, 1], [-1, -1, 
 sg = SampleGenerator(test_data, precision, density, delta)
 
 # sample some points from the estimated distribution
-sample_points = sg.sample_points(n_points=1000)
+sample_points = sg.sample_points(n_samples=1000)
 
 from mpl_toolkits import mplot3d
 fig = plt.figure()
@@ -61,6 +61,10 @@ density = ceil(precision/2)
 
 # create a new distribution sampler object using the test data
 sg = SampleGenerator(test_data, precision, density, delta)
+
+# check that there are less subcubes with mass than points
+print(f'There are {len(list(sg.true_masses.keys()))} subcubes for {test_data.shape[0]} points')
+print(f'There are {len(set(sg.true_masses.values()))} distinct masses.')
 
 # generate a new sample from the estimated distribution
 sampled_points = sg.sample_points(10000)
