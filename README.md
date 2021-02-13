@@ -1,4 +1,4 @@
-The goal of this project to sample points from a multi-dimensional empirical data source using only the samples, without any knowledge of the underlying distribution. This is similar to generative modeling, where new distinct samples resembling the given data are generated. Where this differs from sampling from the empirical distribution (as in bootstrap) is that the newly-generated data points are not identical to a point in the given sample. Currently, the algorithm is only feasible for low-dimensional data, but I am working on optimizing it for high-dimensional data.
+The goal of this project to sample points from a multi-dimensional empirical data source using only the samples, without any knowledge of the underlying distribution. This is an instance generative modeling, where new distinct samples resembling the given data are generated. Usually, generative modeling is carried out with a neral network (Variational Autoenocders, GANs). In comparison to neural networks, where most of the computational power is spent on training, this algorithm does not require training, but computation is spent generating the samples. This algorithm also differs from sampling from the empirical distribution (as in bootstrap) in that the newly-generated data points are not directly drawn from the given sample. The algorithm is technically feasible for large dimensions, with the caveat that the number of data points used to generate the approximation must grow exponentially in the dimensionality.
 
 # Running the Code
 Running the code is easy and can be done in three lines of code.
@@ -22,6 +22,8 @@ Finally, we can generate new samples using the following command.
 
 There is one parameter for this function.
 * `n_points`: sets the number of new samples to generate.
+
+The function returns an array containing the newly sampled data points. 
 
 
 

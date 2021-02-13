@@ -80,3 +80,36 @@ graph.y = sampled_points[:, 1]
 graph.plot_joint(sns.kdeplot, color='blue')
 
 plt.show()
+
+
+
+######################################################
+# Example 3: Comparison with generative network
+######################################################
+import torch
+import math
+train_data_length = 1024
+train_data = torch.zeros((train_data_length, 2))
+# random uniformly distributed x-coordinate
+train_data[:, 0] = 2 * math.pi * torch.rand(train_data_length)
+# y coordinate is the sin of the x coordinate
+train_data[:, 1] = torch.sin(train_data[:, 0])
+
+# plot generated data
+fig = plt.figure()
+ax = plt.axes()
+
+# plot original points in red
+ax.plot(train_data[:,0], train_data[:,1], '.', color='Red', alpha=1)
+
+# plot sampled points in blue
+precision = 100
+delta = (1 / ceil(precision * (precision-1)))**2
+density = ceil(precision/2)
+sg = SampleGenerator(train_data, precision=precision, delta=delta, density=density)
+sample_points = sg.sample_points(100)
+
+ax.plot(sample_points[:,0], sample_points[:,1], '.', color='Blue', alpha=1)
+
+
+plt.show()
