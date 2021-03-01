@@ -15,7 +15,7 @@ path = "/Users/leandereberhard/Downloads/digit-recognizer"
 
 mnist_data = pd.read_csv(path+'/train.csv', header=0)
 
-data_array = np.array(mnist_data)
+data_array = mnist_data.values[:, 1:]
 
 # given all the fours in the MNIST training set, we want to try to generate a new four
 
@@ -130,3 +130,109 @@ plt.show()
 # save the generated four
 
 # pickle.dump(new_four, open(f"generated_four_precision{precision}", "wb"))
+
+
+# import trained GAN for comparison
+import tensorflow as tf
+
+generator = tf.keras.models.load_model('trained_generator')
+generator.weights
+
+# import saved scaler from other script
+import pickle
+scaler = pickle.load(open('scaler.pickle', 'rb'))
+
+
+# make new samples from the generator
+random_noise = np.random.normal(0, 1, 100 * 16).reshape(16, 100)
+# generated figures
+generated_samples = generator(random_noise)
+
+# transform the data back to the original scale
+generated_samples = scaler.inverse_transform(generated_samples)
+
+# plot these samples
+# plot samples
+for i in range(16):
+    ax = plt.subplot(4, 4, i + 1)
+    plt.imshow(generated_samples[i].reshape(28, 28), cmap='gray_r', interpolation='nearest')
+    plt.xticks([])
+    plt.yticks([])
+
+
+# plot some real digits for comparison
+n_rows = data_array.shape[0]
+random_indices = np.random.choice(n_rows, size=16, replace=False)
+
+real_samples = data_array[random_indices, :]
+
+real_samples = scaler.inverse_transform(real_samples)
+
+for i in range(16):
+    ax = plt.subplot(4, 4, i + 1)
+    plt.imshow(real_samples[i].reshape(28, 28), cmap='gray_r', interpolation='nearest')
+    plt.xticks([])
+    plt.yticks([])
+
+
+
+
+##########################
+# compare to closest real digit
+##########################
+
+# use custom algorithm to generate a sample from the normal distribution
+training_data = np.random.normal(0, 1, 100 * 100000).reshape(100000, 100)
+approx = SampleGenerator(training_data)
+random_noise = approx.sample_points(50)
+
+
+generated_samples = generator(random_noise)
+generated_samples = scaler.inverse_transform(generated_samples)
+# generated_samples = generated_samples.reshape((784,))
+
+# plot 16 examples
+n_rows = generated_samples.shape[0]
+random_indices = np.random.choice(n_rows, size=16, replace=False)
+
+real_samples = generated_samples[random_indices, :]
+
+real_samples = scaler.inverse_transform(real_samples)
+
+for i in range(16):
+    ax = plt.subplot(4, 4, i + 1)
+    plt.imshow(real_samples[i].reshape(28, 28), cmap='gray_r', interpolation='nearest')
+    plt.xticks([])
+    plt.yticks([])
+
+
+
+# generate a single example
+random_noise = np.random.normal(0, 1, 100).reshape(1, 100)
+generated_samples = generator(random_noise)
+generated_samples = scaler.inverse_transform(generated_samples)
+generated_samples = generated_samples.reshape((784,))
+
+# round each value to the nearest integer
+rounded = [round(x) for x in list(generated_samples)]
+
+# make sure we are not just adding noise to a single example in the training set
+def vector_distance(vec1, vec2):
+    sum = 0
+    for i in range(len(vec1)):
+        sum += abs(vec1[i] - vec2[i])
+    return sum
+
+closest = min(data_array, key = lambda x: vector_distance(x, rounded))
+
+# show generated number
+ax = plt.subplot(1, 2, 1)
+plt.imshow(np.reshape(rounded, (28, 28)), interpolation='nearest', cmap='gray_r', vmin=0, vmax=255)
+plt.xticks([])
+plt.yticks([])
+
+# show closest real number
+ax = plt.subplot(1, 2, 2)
+plt.imshow(np.reshape(closest, (28, 28)), interpolation='nearest', cmap='gray_r', vmin=0, vmax=255)
+plt.xticks([])
+plt.yticks([])

@@ -99,7 +99,7 @@ def calculate_true_masses(scaled_array, precision):
 # dimension with respect to previous_dim_ind
 
 # corresponds to m_{mathbf{i}_k}
-
+'''
 def get_marginals(true_masses, previous_dim_ind, precision):
     full_dim = len(list(true_masses.keys())[0])
     # dimension of previous_dim_ind
@@ -117,6 +117,29 @@ def get_marginals(true_masses, previous_dim_ind, precision):
             if subcube_ind[:sub_dim+1] == tuple(previous_dim_ind) + (i,):
                 # add the mass from the matching cube to the correct entry in the marginal vector
                 marginals[i-1] += true_masses[subcube_ind]
+
+    return marginals
+'''
+
+def get_marginals(true_masses, previous_dim_ind, precision):
+    full_dim = len(list(true_masses.keys())[0])
+    # dimension of previous_dim_ind
+    sub_dim = len(previous_dim_ind)
+
+    # make sure the requirement is satisfied
+    assert sub_dim <= full_dim-1
+
+    # initialize list of marginal weights
+    marginals = [0 for _ in range(precision)]
+
+    # save all indices whose first sub_dim elements match previous_dim_ind
+    keys_subset = [ind for ind in true_masses.keys() if ind[:sub_dim] == tuple(previous_dim_ind)]
+
+    # sum over all subcubes containing mass in true_masses
+    for i in range(1, precision+1):
+        ind_to_sum_over = [ind for ind in keys_subset if ind[sub_dim+1] == i]
+        for subcube_ind in ind_to_sum_over:
+            marginals[i - 1] += true_masses[subcube_ind]
 
     return marginals
 
