@@ -37,7 +37,7 @@ You can generate the following two examples by running `examples.py`.
 ![](3d_example2.png)
 
 
-* 2D Example: Here, we generate points from a two-dimensional normal distribution with dependent coordinates. The plots are KDE-smoothed versions of first the original sample in blue, then the newly-generated sample from the distribution estimated using the algorithm, and finally the two plot superimposed on top of each other for comparision. As you can see, the algorithm does a pretty good job.
+* 2D Example: Here, we generate points from a two-dimensional normal distribution with dependent coordinates. The plots are KDE-smoothed versions of first the original sample in blue, then the newly-generated sample from the distribution estimated using the algorithm, and finally the two plots superimposed on top of each other for comparision. As you can see, the algorithm does a pretty good job.
 
 ![](2d_example1.png)
 
